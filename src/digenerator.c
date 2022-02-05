@@ -1,4 +1,4 @@
-#include "common.h"
+#include "digenerator.h"
 
 static uint16_t _rnd = 0xAB;
 

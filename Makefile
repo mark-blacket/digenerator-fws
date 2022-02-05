@@ -1,8 +1,8 @@
 AVRDIR = /usr/avr
 DEVICE = /dev/ttyUSB0
-FWLIST = grit dw8000 karplus-strong bytebeat
+FWLIST = grit bernoullator two-op dw8000
 
-.PHONY: all flash clean noargs
+.PHONY: all clean $(FWLIST)
 .SECONDARY: # this turns off stupid autodeletes
 
 all:
@@ -12,13 +12,17 @@ clean:
 %/:
 	mkdir -p $@
 
-build/%.o: src/%.c src/common.h | build/
+disassemble: $(FWLIST:%=disasm/%.lst)
+disasm/%.lst: build/%.elf | disasm/
+	avr-objcopy -S $< > $@
+
+build/%.o: src/%.c src/digenerator.h | build/
 	avr-gcc -c -std=gnu99 -Os -Wall         \
 	    -ffunction-sections -fdata-sections \
 		-mmcu=atmega328p -DF_CPU=16000000   \
 		-I$(AVRDIR)/include -o $@ $<
 
-build/%.elf: build/%.o build/common.o
+build/%.elf: build/%.o build/digenerator.o
 	avr-gcc -ffunction-sections -fdata-sections \
 		-Os -mmcu=atmega328p -Wl,--gc-sections -o $@ $^
 

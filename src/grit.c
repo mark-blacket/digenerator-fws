@@ -1,4 +1,4 @@
-#include "common.h"
+#include "digenerator.h"
 
 volatile uint8_t frames[8][32] = {
     {128, 152, 176, 198, 217, 233, 245, 252, 255, 252, 245, 233, 217, 198, 176, 152, 128, 103, 79, 57, 38, 22, 10, 3, 1, 3, 10, 22, 38, 57, 79, 103},
@@ -16,7 +16,7 @@ volatile uint8_t wave = 0, fx = 0, counter = 0, canMutate = 1, canResync = 1;
 VCO_INTERRUPT()
 { 
     if (++counter == 32) {
-        if (!INGATE2) wave = CV >> 5; // 3 higher bytes for wave
+        if (!INGATE2) wave = CV >> 5;
         if (!INGATE3) fx = CV;
         counter = 0;
     }
