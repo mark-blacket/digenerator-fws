@@ -62,7 +62,7 @@ void setup()
     EICRA |= B(ISC11);           // rising edge
     sei();
 
-    ADMUX  |= B(REFS0) | B(ADLAR) | B(MUX2) | B(MUX1); // avcc, left-align, channel 6
-    ADCSRA |= B(ADEN)  | B(ADATE) | B(ADPS2);          // freerun, /16 prescale, start
+    ADMUX  |= B(REFS0) | B(ADLAR) | B(MUX2)  | B(MUX1);  // avcc, left-align, channel 6
+    ADCSRA |= B(ADEN)  | B(ADATE) | B(ADPS1) | B(ADPS0); // freerun, /8 prescale, start
     ADCSRA |= B(ADSC);
 }

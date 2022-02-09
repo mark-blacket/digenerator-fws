@@ -1,7 +1,7 @@
 #include "digenerator.h"
 
 #define BUFSIZE 32
-#define LIMIT   ((BUFSIZE >> !OPTA) - 1)
+#define LIMIT   ((BUFSIZE >> !!OPTA) - 1)
 #define STEP    (1 + !INGATE1)
 
 const uint8_t sine[BUFSIZE] = {
@@ -32,7 +32,7 @@ VCO_INTERRUPT()
     }
     if ((CV >> 1) >= var[count]) OUTGATE_ON;
     else OUTGATE_OFF;
-    dac(var[count] << ((OPTA) ? 0 : 1));
+    dac(var[count] << ((OPTA) ? 1 : 0));
 }
 
 GATE_INTERRUPT()
