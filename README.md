@@ -1,6 +1,6 @@
 # Alternative firmwares for Synthfox Digenerator
 
-The firmwares do not use arduino libraries and only depend on avr-gcc standard library. Files *digenerator.c* and *digenerator.h* contain code from original firmwares by Synthfox, but rewritten in pure C.
+The firmwares do not use arduino libraries and only depend on avr-gcc standard library. Files *digenerator.c* and *digenerator.h* mostly contain code from original firmwares by Synthfox, but rewritten in pure C.
 Compiled firmwares are included in the repository, you can flash them using a bash script:
 
 > ./flash.sh \*firmware-name\*
