@@ -52,13 +52,6 @@ INLINE(uint8_t) shift(uint8_t w, uint8_t i) {
          + (table[w + 1][count] & (0xFF >> (8 - i)));
 }
 
-// opts - morph type
-// gates 1-2 - harmonics
-// gate 3 - sync
-// gate 4 - reverse
-// cv - wave select
-// gate out - sub
-
 VCO_INTERRUPT()
 {
     uint8_t step   = 1 + (INGATES & 0x03);

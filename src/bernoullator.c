@@ -20,15 +20,6 @@ const uint8_t saw[BUFSIZE] = {
 volatile uint8_t var[BUFSIZE] = {0};
 volatile uint8_t count = 0, direction = 0, resync = 1;
 
-// opt a - full-wave rectifier
-// opt b - sine-square -> saw-square
-// gate 1 - octave up
-// gate 2 - hold waveform
-// gate 3 - sync
-// gate 4 - reverse
-// cv - probability
-// gate out - 1-bit noise
-
 VCO_INTERRUPT()
 {
     count = (direction ? (count - STEP) : (count + STEP)) & LIMIT; 

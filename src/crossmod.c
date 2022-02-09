@@ -11,13 +11,6 @@ const int8_t sine[BUFSIZE] = {
 
 volatile uint8_t count = 0, resync = 1;
 
-// cv - mod input
-// opt a - fold/ringmod
-// opt b - 16/64 samples
-// gate 1 - sync
-// gates 2-4 - glitch switch
-// gate out - comparator
-
 VCO_INTERRUPT()
 {
     count = (count + 1 + !OPTB * 3) & (BUFSIZE - 1);
