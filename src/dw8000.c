@@ -41,13 +41,12 @@ const uint8_t table[17][BUFSIZE] = {
 
 volatile uint8_t count = 0, direction = 0, resync = 0;
 
-INLINE(uint8_t) avg(uint8_t w, uint8_t i) {
-    return clipAdd((table[w][count] >> 3) * (8 - i), (table[w + 1][count] >> 3) * i);
-}
-INLINE(uint8_t) splice(uint8_t w, uint8_t i) {
+INLINE(uint8_t) splice(uint8_t w, uint8_t i)
+{
     return table[((count >> 2) >= i) ? w : w + 1][count];
 }
-INLINE(uint8_t) shift(uint8_t w, uint8_t i) {
+INLINE(uint8_t) shift(uint8_t w, uint8_t i)
+{
     return (table[w][count] & (0xFF << i)) 
          + (table[w + 1][count] & (0xFF >> (8 - i)));
 }
@@ -65,7 +64,7 @@ VCO_INTERRUPT()
         dac(table[wave][count]);
         break;
     case 1:
-        dac(avg(wave, interp));
+        dac(xfade(table[wave][count], table[wave + 1][count], interp));
         break;
     case 2:
         dac(splice(wave, interp));

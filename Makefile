@@ -1,6 +1,6 @@
 AVRDIR = /usr/avr
 DEVICE = /dev/ttyUSB0
-FWLIST = bernoullator crossmod dw8000
+FWLIST = bernoullator crossmod dw8000 repeater
 
 .PHONY: all clean fullclean $(FWLIST)
 .SECONDARY: # this turns off stupid autodeletes
