@@ -13,6 +13,15 @@ volatile uint8_t frames[8][32] = {
 
 volatile uint8_t wave = 0, fx = 0, counter = 0, canMutate = 1, canResync = 1;
 
+// opt a - cut
+// opt b - distortion type
+// gate 1 - sync
+// gate 2 - wave hold
+// gate 3 - fx hold
+// gate 4 - mutate
+// cv - character
+// gate out - sub
+
 VCO_INTERRUPT()
 { 
     if (++counter == 32) {

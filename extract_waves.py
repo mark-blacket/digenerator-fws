@@ -1,4 +1,4 @@
-#!python3
+#!/usr/bin/python
 
 '''
 Each ROM contains 4 waves, 8bit unsigned format, with the following data:
@@ -52,10 +52,10 @@ if __name__ == "__main__":
     table = wavetables[sys.argv[1]]
 
     fig, axs = plt.subplots(4, 4)
-    print("const uint8_t wavetable[16][64] = {")
+    print("const uint8_t wavetable[16][32] = {")
     for i in range(4):
         for j in range(4):
-            wave = [table[4 * i + j][octave][x*8 + 3] for x in range(64)]
+            wave = [table[4 * i + j][octave][x*16 + 8] for x in range(32)]
             print("    {" + ", ".join(["{:3d}".format(x) for x in wave]) + "},")
             axs[i, j].axes.xaxis.set_visible(False)
             axs[i, j].axes.yaxis.set_visible(False)

@@ -46,21 +46,23 @@ uint8_t div3(uint8_t n)
 void dac(unsigned char val)
 {
     val = reverse(val);
-    PORTB &= 0x00;         // clear
-    PORTD |= (val) & 0xF0; // 4 upper bits go to PORTD
-    PORTB |= (val) & 0x0F; // 4 lower bits go to PORTB
+    PORTD &= 0x0F;
+    PORTB &= 0xF0;
+    PORTD |= (val) & 0xF0;
+    PORTB |= (val) & 0x0F;
 }
 
 void setup()
 {
-    DDRD = 0xF0;                      // 0-3 in, 4-7 out
-    DDRB = 0x1F;                      // 0-4 out, 5-7 in
-    DDRC = 0x00;                      // all in
+    DDRD = 0xF0;
+    DDRB = 0x1F;
+    DDRC = 0x00;
     
-    EIMSK |= 0x03;                    // enable both external interrupts
-    EICRA |= 0x0F;                    // trigger on rising edge
-    sei();                            // allow interrupts
+    EIMSK |= B(INT0) | B(INT1);  // enable both interrupts
+    EICRA |= B(ISC11);           // rising edge
+    sei();
 
-    ADCSRA = (ADCSRA & ~0x03) | 0x04; // set adc clock prescaler to /16 
-    ADMUX |= 0x20;                    // left-adjust adc results
+    ADMUX  |= B(REFS0) | B(ADLAR) | B(MUX2) | B(MUX1); // avcc, left-align, channel 6
+    ADCSRA |= B(ADEN)  | B(ADATE) | B(ADPS2);          // freerun, /16 prescale, start
+    ADCSRA |= B(ADSC);
 }

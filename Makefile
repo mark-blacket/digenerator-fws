@@ -1,6 +1,6 @@
 AVRDIR = /usr/avr
 DEVICE = /dev/ttyUSB0
-FWLIST = grit bernoullator two-op dw8000
+FWLIST = grit bernoullator crossmod dw8000
 
 .PHONY: all clean $(FWLIST)
 .SECONDARY: # this turns off stupid autodeletes
@@ -8,7 +8,9 @@ FWLIST = grit bernoullator two-op dw8000
 all:
 	@echo "select firmware: $(FWLIST)"
 clean:
-	rm -rf build fw
+	rm -rf build disasm
+fullclean:
+	rm -rf build fw disasm
 %/:
 	mkdir -p $@
 
@@ -30,6 +32,5 @@ fw/%.hex: build/%.elf | fw/
 	avr-objcopy -O ihex -R .eeprom $< $@
 
 $(FWLIST): %: fw/%.hex
-	@echo "done"
-#	avrdude -p atmega328p -c arduino -b 57600 \
-#		-P $(DEVICE) -D -U flash:w:$<:i 
+	avrdude -p atmega328p -c arduino -b 57600 \
+		-P $(DEVICE) -D -U flash:w:$<:i 

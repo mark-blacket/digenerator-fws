@@ -5,6 +5,7 @@
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 
+#define B(n) (1 << n)
 #define INLINE(type) static inline type __attribute__((always_inline))
 
 #define INGATES (PINC & 0x0F)
@@ -38,5 +39,11 @@ INLINE(uint8_t) clipAdd(uint8_t x, uint8_t y) { return (y >= (255 - x)) ? 255 : 
 INLINE(uint8_t) clipSub(uint8_t x, uint8_t y) { return (y >= x) ? 0 : (x - y); }
 INLINE(uint8_t) foldAdd(uint8_t x, uint8_t y) { return (y > (255 - x)) ? 0 - (x + y) : (x + y); }
 INLINE(uint8_t) foldSub(uint8_t x, uint8_t y) { return (y > x) ? 0 - (x - y) : (x - y); }
+INLINE(int16_t) ifoldAdd(int8_t x, int8_t y) { 
+    int16_t res = (int16_t) x + (int16_t) y;
+    return (res >  127) ?  127 - ( res - 127)
+         : (res < -128) ? -128 + (-128 - res)
+         :  res;
+}
 
 #endif // __DGR_H_
