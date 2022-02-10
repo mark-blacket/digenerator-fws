@@ -48,7 +48,7 @@ VCO_INTERRUPT()
         if (!INGATE2)
             buffer[count] = clipAdd(input, buffer[count] >> (OPTB ? 1 : 2));
         count = updateCount(count, BUFSIZE - 1);
-        if (count >= BUFSIZE - 4 || count < 4) OUTGATE_ON;
+        if (count < 4) OUTGATE_ON;
         else OUTGATE_OFF;
         dac(buffer[count]);
     }
@@ -57,7 +57,7 @@ VCO_INTERRUPT()
 GATE_INTERRUPT()
 {
     if (INGATE3) count = 0;
-    if (INGATE4) direction ^= 1;
+    if (INGATE4) direction = !direction;
 }
 
 int main() { setup(); for(;;) {} }

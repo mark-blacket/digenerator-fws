@@ -43,7 +43,7 @@ uint8_t div3(uint8_t n)
     return (n == 3) ? (sum + 1) : sum;
 }
 
-void dac(unsigned char val)
+void dac(uint8_t val)
 {
     val = reverse(val);
     PORTD &= 0x0F;

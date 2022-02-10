@@ -43,7 +43,7 @@ Wavetable oscillator loosely based on Korg DW-8000 waveforms
 
 VCO-clocked digital delay and glitch/stutter machine
 
-(Disclaimer: set the character knob exactly to 12 o'clock to tame the clock noise (or don't)
+Disclaimer: set the character knob exactly to 12 o'clock to tame the clock noise (or don't)
 
  - character - input
  - opt a - 8bit / 4bit samples

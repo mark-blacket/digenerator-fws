@@ -47,7 +47,7 @@ INLINE(int16_t) ifoldAdd(int8_t x, int8_t y)
          :  res;
 }
 INLINE(uint8_t) xfade(uint8_t x, uint8_t y, uint8_t i) { 
-    i &= 8;
+    i &= 7;
     return clipAdd((x >> 3) * (8 - i), (y >> 3) * i);
 }
 
