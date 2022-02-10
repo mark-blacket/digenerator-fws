@@ -1,20 +1,15 @@
 # Alternative firmwares for Synthfox Digenerator
 
-The firmwares do not use arduino libraries and only depend on avr-gcc standard library. Files *digenerator.c* and *digenerator.h* mostly contain code from original firmwares by Synthfox, but rewritten in pure C.
-Compiled firmwares are included in the repository, you can flash them using a bash script:
+The firmwares do not use arduino libraries and only depend on avr-gcc standard library. Files *digenerator.c* and *digenerator.h* mostly contain code taken from the original firmwares by Synthfox, but rewritten in pure C.
 
-> ./flash.sh \*firmware-name\*
-
-Alternatively you can compile them yourself using make:
-
-> make \*firmware-name\*
+Compiled firmwares are included in the repository, you can flash them using a bash script: **./flash.sh \*firmware-name\***. Alternatively you can compile them yourself using **make**
 
 ## Bernoullator
 
 A probability-based oscillator/noise generator, draws samples from two different waveforms depending on probability setting.
 
  - character - probability
- - opt a     - full-wave rectification
+ - opt a     - full-wave rectification (kinda)
  - opt b     - selects between square-to-sine and square-to-saw waves
  - gate 1    - octave up
  - gate 2    - freeze current waveshape
