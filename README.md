@@ -38,3 +38,18 @@ Wavetable oscillator loosely based on Korg DW-8000 waveforms
  - gate 3    - sync
  - gate 4    - glitchy softsync
  - gate out  - suboscillator
+
+## Repeater
+
+VCO-clocked digital delay and glitch/stutter machine
+
+(Disclaimer: set the character knob exactly to 12 o'clock to tame the clock noise (or don't)
+
+ - character - input
+ - opt a - 8bit / 4bit samples
+ - opt b - shorter / longer feedback
+ - gate 1 - stop
+ - gate 2 - freeze
+ - gate 3 - restart
+ - gate 4 - reverse
+ - gate out - beginning of buffer
