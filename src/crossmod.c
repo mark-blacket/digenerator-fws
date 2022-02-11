@@ -10,19 +10,13 @@ const int8_t sine[BUFSIZE] = {
 };
 
 volatile uint8_t count = 0, resync = 1;
+volatile int8_t  sample = 0;
 
 VCO_INTERRUPT()
 {
     count = (count + 1 + !OPTB * 3) & (BUFSIZE - 1);
-    uint8_t glitch = (INGATES + reverse(INGATES)) & 0xE7;
-    int8_t  sample = sine[count] ^ glitch;
-    int16_t modulator = (int16_t) CV - 128;
-    if (modulator > -2 && modulator < 2) modulator = 0;
-    if (sample > modulator) OUTGATE_ON;
-    else OUTGATE_OFF;
-    int16_t result = (OPTA) ? ifoldAdd(modulator, sample)
-                            : (modulator * sample) >> 8;
-    dac((uint8_t) result + 128);
+    uint8_t glitch = (INGATES + (INGATES << 4)) & 0xE7;
+    sample = sine[count] ^ glitch;
 }
 
 GATE_INTERRUPT()
@@ -38,5 +32,12 @@ int main()
     setup();
     for(;;) {
         if (!INGATE1) resync = 1;
+        int16_t modulator = (int16_t) CV - 128;
+        if (modulator > -2 && modulator < 2) modulator = 0;
+        if (sample > modulator) OUTGATE_ON;
+        else OUTGATE_OFF;
+        int16_t result = (OPTA) ? ifoldAdd(modulator, sample)
+                                : (modulator * sample) >> 8;
+        dac((uint8_t) result + 128);
     }
 }
