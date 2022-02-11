@@ -41,13 +41,12 @@ Wavetable oscillator loosely based on Korg DW-8000 waveforms
 
 ## Repeater
 
-VCO-clocked digital delay and glitch/stutter machine
-
-Disclaimer: set the character knob exactly to 12 o'clock to tame the clock noise (or don't)
+VCO-clocked dirty digital delay and glitch/stutter machine
+Internal feedback is a bit buggy and sometimes doesn't fade to complete silence, can be temporarily fixed by fiddling with the character knob (which should be set somewhere around 12:00)
 
  - character - input
  - opt a - 8bit / 4bit samples
- - opt b - shorter / longer feedback
+ - opt b - internal feedback on/off
  - gate 1 - stop
  - gate 2 - freeze
  - gate 3 - restart
