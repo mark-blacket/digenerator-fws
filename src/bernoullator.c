@@ -2,7 +2,7 @@
 
 #define BUFSIZE 32
 #define LIMIT   ((BUFSIZE >> !!OPTA) - 1)
-#define STEP    (1 + !INGATE1)
+#define STEP    (1 + INGATE1)
 
 const uint8_t sine[BUFSIZE] = {
     127, 103,  79,  56,  37,  21,   9,   2,   0,   2,   9,  21,  37,  56,  79, 103,
@@ -20,7 +20,7 @@ const uint8_t saw[BUFSIZE] = {
 volatile uint8_t var[BUFSIZE] = {0};
 volatile uint8_t count = 0, direction = 0, resync = 1;
 
-VCO_INTERRUPT()
+VCO_INTERRUPT(ISR_NOBLOCK)
 {
     count = (direction ? (count - STEP) : (count + STEP)) & LIMIT; 
     if (!INGATE2) {

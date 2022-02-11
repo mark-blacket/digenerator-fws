@@ -30,6 +30,7 @@
 uint16_t random();
 uint8_t  reverse(uint8_t);
 uint8_t  div3(uint8_t);
+uint8_t  avg(uint8_t *, uint8_t);
 void     dac(uint8_t);
 void     setup();
 

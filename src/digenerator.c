@@ -43,13 +43,23 @@ uint8_t div3(uint8_t n)
     return (n == 3) ? (sum + 1) : sum;
 }
 
+uint8_t avg(uint8_t * arr, uint8_t size)
+{
+    uint16_t sum = 0;
+    for (uint8_t i = 0; i < size; ++i)
+        sum += arr[i];
+    return (uint8_t) (sum / size);
+}
+
 void dac(uint8_t val)
 {
     val = reverse(val);
-    PORTD &= 0x0F;
-    PORTB &= 0xF0;
-    PORTD |= (val) & 0xF0;
-    PORTB |= (val) & 0x0F;
+    // PORTD &= 0x0F;
+    // PORTB &= 0xF0;
+    // PORTD |= (val) & 0xF0;
+    // PORTB |= (val) & 0x0F;
+    PORTD = (PORTD & 0x0F) | (val & 0xF0);
+    PORTB = (PORTB & 0xF0) | (val & 0x0F);
 }
 
 void setup()
