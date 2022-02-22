@@ -19,10 +19,10 @@ A probability-based oscillator/noise generator, draws samples from two different
  
 ## Crossmod
 
-Digital ringmodulator / modulated distortion
+Lo-fi sine osc for audio-rate modulation
 
  - character - modulator input
- - opt a     - selects between ringmodulation and distortion
+ - opt a     - selects between ringmodulation and crude phase modulation
  - opt b     - switch between 16-sample and 64-sample sine approximation
  - gate 1    - sync
  - gates 2-4 - waveform thrashing

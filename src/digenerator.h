@@ -40,14 +40,8 @@ INLINE(uint8_t) diff(uint8_t x, uint8_t y) { return (y > x) ? (y - x) : (x - y);
 INLINE(uint8_t) clipAdd(uint8_t x, uint8_t y) { return (y >= (255 - x)) ? 255 : (x + y); }
 INLINE(uint8_t) clipSub(uint8_t x, uint8_t y) { return (y >= x) ? 0 : (x - y); }
 INLINE(uint8_t) foldAdd(uint8_t x, uint8_t y) { return (y > (255 - x)) ? 0 - (x + y) : (x + y); }
-INLINE(int16_t) ifoldAdd(int8_t x, int8_t y)
+INLINE(uint8_t) xfade(uint8_t x, uint8_t y, uint8_t i)
 { 
-    int16_t res = (int16_t) x + (int16_t) y;
-    return (res >  127) ?  127 - ( res - 127)
-         : (res < -128) ? -128 + (-128 - res)
-         :  res;
-}
-INLINE(uint8_t) xfade(uint8_t x, uint8_t y, uint8_t i) { 
     i &= 7;
     return clipAdd((x >> 3) * (8 - i), (y >> 3) * i);
 }
