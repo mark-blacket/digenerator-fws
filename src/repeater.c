@@ -30,7 +30,7 @@ VCO_INTERRUPT(ISR_NOBLOCK)
             count <<= 1;
         }
         if (!INGATE2)
-            writeNib(count, OPTB ? xfade(CV, readNib(count), 3) : CV);
+            writeNib(count, OPTB ? clipAdd(CV - (CV >> 2), readNib(count) >> 1) : CV);
         count = updateCount(count, (BUFSIZE << 1) - 1);
         if (count >= (BUFSIZE << 1) - 2 || count < 2) OUTGATE_ON;
         else OUTGATE_OFF;
@@ -41,7 +41,7 @@ VCO_INTERRUPT(ISR_NOBLOCK)
             count >>= 1;
         }
         if (!INGATE2)
-            buffer[count] = OPTB ? xfade(CV, buffer[count], 3) : CV;
+            buffer[count] = OPTB ? clipAdd(CV - (CV >> 2), buffer[count] >> 1) : CV;
         count = updateCount(count, BUFSIZE - 1);
         if (count >= (BUFSIZE - 2) || count < 2) OUTGATE_ON;
         else OUTGATE_OFF;
